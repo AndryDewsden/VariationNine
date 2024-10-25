@@ -20,6 +20,7 @@ namespace VariationNine
         public MainWindow()
         {
             InitializeComponent();
+            AppConnect.entities = new ApplicationData.AndryEntities();
             AppFrame.frameMain = FrmMain;
             FrmMain.Navigate(new Auto());
         }

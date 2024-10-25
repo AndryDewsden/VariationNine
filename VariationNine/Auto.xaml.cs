@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VariationNine.ApplicationData;
 
 namespace VariationNine
 {
@@ -27,28 +28,28 @@ namespace VariationNine
         {
             try
             {
-                //Users_ToyStore userObj = AppConnect.entities.Users_ToyStore.FirstOrDefault(x => x.user_login == txbLogin.Text && x.user_password == txbPassword.Password);
+                Users userObj = AppConnect.entities.Users.FirstOrDefault(x => x.user_login == txbLogin.Text && x.user_password == txbPassword.Password);
 
-                if (1 == 1)//userObj == null)
+                if (userObj == null)
                 {
                     MessageBox.Show("Такого пользователя нет!", "Ошибка при авторизации", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
                 else
                 {
-                    switch (1) //userObj.user_id_role)
+                    switch (userObj.user_role_id)
                     {
                         case 1:
-                            //MessageBox.Show("Здравствуйте, администратор " + userObj.user_name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                            //AppFrame.frameMain.Navigate(new Show(userObj));
+                            MessageBox.Show("Здравствуйте, пользователь " + userObj.user_name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                            AppFrame.frameMain.Navigate(new Goods());
                             break;
                         case 2:
-                            //MessageBox.Show("Здравствуйте, пользователь " + userObj.user_name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                            //AppFrame.frameMain.Navigate(new Show(userObj));
+                            MessageBox.Show("Здравствуйте, менеджер " + userObj.user_name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                            AppFrame.frameMain.Navigate(new Goods());
                             break;
                         case 3:
-                            //MessageBox.Show("Здравствуйте, менеджер " + userObj.user_name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                            //AppFrame.frameMain.Navigate(new Show(userObj));
+                            MessageBox.Show("Здравствуйте, " + userObj.user_name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                            AppFrame.frameMain.Navigate(new Goods());
                             break;
                         default:
                             MessageBox.Show("Ошибка данных на сервере.", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -65,7 +66,7 @@ namespace VariationNine
 
         private void SendList_Click(object sender, RoutedEventArgs e)
         {
-            //AppFrame.frameMain.Navigate(new Reg());
+            AppFrame.frameMain.Navigate(new Goods());
         }
 
         private void ExitB_Click(object sender, RoutedEventArgs e)

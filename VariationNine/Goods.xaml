@@ -5,8 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:VariationNine"
       mc:Ignorable="d" 
-      d:DesignHeight="650" d:DesignWidth="1000"
-      Title="Goods">
+      d:DesignHeight="850" d:DesignWidth="1000"
+      Title="Товары">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -14,9 +14,8 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="350"/>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="350"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
 
@@ -43,7 +42,7 @@
             </StackPanel>
         </Grid>
 
-        <ListView x:Name="listProducts" ItemsSource="{Binding CurrentPageAgents}" Grid.Row="1" ScrollViewer.CanContentScroll="False" Width="960" Background="#AFEEEE	">
+        <ListView x:Name="listProducts" ItemsSource="{Binding CurrentPageAgents}" Grid.Row="1" ScrollViewer.CanContentScroll="True" Height="auto" Width="960" Background="#AFEEEE	">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="1" BorderBrush="Gray" CornerRadius="10" Background="#ffffff">
@@ -97,22 +96,5 @@
                 </ContextMenu>
             </ListView.ContextMenu>
         </ListView>
-
-        <Grid Grid.Row="3" HorizontalAlignment="Center">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300"/>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="300"/>
-            </Grid.ColumnDefinitions>
-
-            <Button x:Name="prevButton" Content="Предыдушая" Click="PrevButton_Click" Width="200" Height="30" Grid.Column="0"/>
-            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-                <TextBlock Text="Страница "/>
-                <ComboBox x:Name="pageComboBox" ItemsSource="{Binding PageNumbers}" SelectedItem="{Binding SelectedPage}" Height="30" Width="50"/>
-                <TextBlock Text=" из "/>
-                <TextBlock Text="{Binding TotalPages}"/>
-            </StackPanel>
-            <Button x:Name="nextButton" Content="Следушая" Click="NextButton_Click" Width="200" Height="30" Grid.Column="2"/>
-        </Grid>
     </Grid>
 </Page>
