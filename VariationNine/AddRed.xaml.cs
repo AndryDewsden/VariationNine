@@ -25,60 +25,58 @@ namespace VariationNine
             InitializeComponent();
             use = user;
 
-            Combo_names.Items.Add("-выбрать-");
+            categoryComboBox.Items.Add("-выбрать-");
+            ediComboBox.Items.Add("--");
+            makerComboBox.Items.Add("--");
+            giverComboBox.Items.Add("--");
 
             //заполнение списка категорий
             for (int i = 0; i < AppConnect.entities.Categories.ToList().Count; i++)
             {
-                Combo_names.Items.Add(AppConnect.entities.Categories.ToList()[i]);
+                categoryComboBox.Items.Add(AppConnect.entities.Categories.ToList()[i]);
+            }
+            for (int i = 0; i < AppConnect.entities.Edis.ToList().Count; i++)
+            {
+                ediComboBox.Items.Add(AppConnect.entities.Edis.ToList()[i]);
+            }
+            for (int i = 0; i < AppConnect.entities.Makers.ToList().Count; i++)
+            {
+                makerComboBox.Items.Add(AppConnect.entities.Makers.ToList()[i]);
+            }
+            for (int i = 0; i < AppConnect.entities.Givers.ToList().Count; i++)
+            {
+                giverComboBox.Items.Add(AppConnect.entities.Givers.ToList()[i]);
             }
 
             if (aget != null)
             {
                 _curAgent = aget;
-                Title = "Редактирование агента";
+                Title = "Редактирование товара";
                 Red.IsEnabled = true;
 
                 check(nameBox, nameBoxPlaceHolder);
-                check(priorityBox, priorityBoxPlaceHolder);
-                check(logoBox, logoBoxPlaceHolder);
-                check(addressBox, addressBoxPlaceHolder);
-                check(innBox, innBoxPlaceHolder);
-                check(kppBox, kppBoxPlaceHolder);
-                check(directorNameBox, directorNameBoxPlaceHolder);
-                check(phoneBox, phoneBoxPlaceHolder);
-                check(emailBox, emailBoxPlaceHolder);
 
             }
             else
             {
-                Title = "Добавление агента";
+                Title = "Добавление товара";
                 Red.IsEnabled = false;
                 Red.Visibility = Visibility.Collapsed;
-
-                check(priorityBox, priorityBoxPlaceHolder);
-
             }
 
             DataContext = _curAgent;
         }
 
-        //вернуться
-        private void goBack_Click(object sender, RoutedEventArgs e)
-        {
-            AppFrame.frameMain.GoBack();
-        }
-
         //к магазину
         private void list_Click(object sender, RoutedEventArgs e)
         {
-            AppFrame.frameMain.Navigate(new Goods());
+            AppFrame.frameMain.Navigate(new Show(use));
         }
 
         //добавить товар
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            if (Combo_names.SelectedIndex != 0 && nameBox.Text != "" && priorityBox.Text != "" && addressBox.Text != "" && innBox.Text != "" && kppBox.Text != "" && directorNameBox.Text != "" && phoneBox.Text != "" && emailBox.Text != "" && logoBox.Text != "")
+            if (articleBox.Text != "" && nameBox.Text != "" && descriptionBox.Text != "" && priceBox.Text != "" && actSkidBox.Text != "" && maxSkidBox.Text != "" && kolvoBox.Text != "" && categoryComboBox.SelectedIndex != 0 && ediComboBox.SelectedIndex != 0 && makerComboBox.SelectedIndex != 0 && giverComboBox.SelectedIndex != 0)
             {
                 var res = MessageBox.Show("Вы действительно хотите добавить этот товар?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Information);
 
@@ -86,10 +84,25 @@ namespace VariationNine
                 {
                     try
                     {
-                        //AppConnect.entities.Goods.Add(_curAgent);
+                        _curAgent.good_article = articleBox.Text;
+                        _curAgent.price = Convert.ToInt32(priceBox.Text);
+                        _curAgent.act_skid = Convert.ToInt32(actSkidBox.Text);
+                        _curAgent.max_skid = Convert.ToInt32(maxSkidBox.Text);
+                        _curAgent.good_name = nameBox.Text;
+                        _curAgent.discription = descriptionBox.Text;
+                        _curAgent.image = imageBox.Text;
+                        _curAgent.category_id = AppConnect.entities.Categories.FirstOrDefault(x => x.category_name == categoryComboBox.Text).id_category;
+                        _curAgent.edi_id = AppConnect.entities.Edis.FirstOrDefault(x => x.edi_name == ediComboBox.Text).id_edi;
+                        _curAgent.maker_id = AppConnect.entities.Makers.FirstOrDefault(x => x.maker_name == makerComboBox.Text).id_maker;
+                        _curAgent.giver_id = AppConnect.entities.Givers.FirstOrDefault(x => x.giver_name == giverComboBox.Text).id_giver;
+                        _curAgent.kolvo = Convert.ToInt32(kolvoBox.Text);
+
+
+                        AppConnect.entities.Goods.Add(_curAgent);
                         AppConnect.entities.SaveChanges();
-                        MessageBox.Show("Данные успешно добавленны", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                        AppFrame.frameMain.Navigate(new Goods());
+                        
+                        MessageBox.Show("Товар успешно добавлен", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                        AppFrame.frameMain.Navigate(new Show(use));
                     }
 
                     catch (Exception ex)
@@ -100,14 +113,14 @@ namespace VariationNine
             }
             else
             {
-                MessageBox.Show("Заполните все необходимые поля!", "Уведомлениее", MessageBoxButton.OK);
+                MessageBox.Show("Заполните все необходимые поля!", "Уведомление", MessageBoxButton.OK);
             }
         }
 
         //редактировать товар
         private void Red_Click(object sender, RoutedEventArgs e)
         {
-            if (Combo_names.SelectedIndex != 0)
+            if (articleBox.Text != "" && nameBox.Text != "" && descriptionBox.Text != "" && priceBox.Text != "" && actSkidBox.Text != "" && maxSkidBox.Text != "" && kolvoBox.Text != "" && categoryComboBox.SelectedIndex != 0 && ediComboBox.SelectedIndex != 0 && makerComboBox.SelectedIndex != 0 && giverComboBox.SelectedIndex != 0)
             {
                 var res = MessageBox.Show("Вы действительно хотите редактировать этот товар?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Information);
 
@@ -115,10 +128,23 @@ namespace VariationNine
                 {
                     try
                     {
-
+                        _curAgent.good_article = articleBox.Text;
+                        _curAgent.price = Convert.ToInt32(priceBox.Text);
+                        _curAgent.act_skid = Convert.ToInt32(actSkidBox.Text);
+                        _curAgent.max_skid = Convert.ToInt32(maxSkidBox.Text);
+                        _curAgent.good_name = nameBox.Text;
+                        _curAgent.discription = descriptionBox.Text;
+                        _curAgent.image = imageBox.Text;
+                        _curAgent.category_id = AppConnect.entities.Categories.FirstOrDefault(x => x.category_name == categoryComboBox.Text).id_category;
+                        _curAgent.edi_id = AppConnect.entities.Edis.FirstOrDefault(x => x.edi_name == ediComboBox.Text).id_edi;
+                        _curAgent.maker_id = AppConnect.entities.Makers.FirstOrDefault(x => x.maker_name == makerComboBox.Text).id_maker;
+                        _curAgent.giver_id = AppConnect.entities.Givers.FirstOrDefault(x => x.giver_name == giverComboBox.Text).id_giver;
+                        _curAgent.kolvo = Convert.ToInt32(kolvoBox.Text);
+                        
                         AppConnect.entities.SaveChanges();
-                        MessageBox.Show("Данные успешно редактированы", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                        AppFrame.frameMain.Navigate(new Goods());
+
+                        MessageBox.Show("Товар успешно редактирован", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                        AppFrame.frameMain.Navigate(new Show(use));
                     }
 
                     catch (Exception ex)
@@ -129,8 +155,19 @@ namespace VariationNine
             }
             else
             {
-                MessageBox.Show("Заполните все необходимые поля!", "Уведомлениее", MessageBoxButton.OK);
+                MessageBox.Show("Заполните все необходимые поля!", "Уведомление", MessageBoxButton.OK);
             }
+        }
+
+        private void articleBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            check(articleBox, actSkidBoxPlaceHolder);
+            placeHolder(articleBox, articleBoxPlaceHolder);
+        }
+        private void articleBoxPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
+        {
+            Original(articleBox, articleBoxPlaceHolder);
+            articleBox.Focus();
         }
 
         private void nameBox_LostFocus(object sender, RoutedEventArgs e)
@@ -145,101 +182,73 @@ namespace VariationNine
             nameBox.Focus();
         }
 
-        private void priorityBox_LostFocus(object sender, RoutedEventArgs e)
+        private void imageBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            check(priorityBox, priorityBoxPlaceHolder);
-            placeHolder(priorityBox, priorityBoxPlaceHolder);
+            check(imageBox, imageBoxPlaceHolder);
+            placeHolder(imageBox, imageBoxPlaceHolder);
+        }
+        private void imageBoxPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
+        {
+            Original(imageBox, imageBoxPlaceHolder);
+            imageBox.Focus();
         }
 
-        private void priorityBoxPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
+        private void descriptionBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            Original(priorityBox, priorityBoxPlaceHolder);
-            priorityBox.Focus();
+            check(descriptionBox, descriptionBoxPlaceHolder);
+            placeHolder(descriptionBox, descriptionBoxPlaceHolder);
+        }
+        private void descriptionBoxPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
+        {
+            Original(descriptionBox, descriptionBoxPlaceHolder);
+            descriptionBox.Focus();
         }
 
-        private void logoBox_LostFocus(object sender, RoutedEventArgs e)
+        private void priceBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            check(logoBox, logoBoxPlaceHolder);
-            placeHolder(logoBox, logoBoxPlaceHolder);
+            check(priceBox, priceBoxPlaceHolder);
+            placeHolder(priceBox, priceBoxPlaceHolder);
+        }
+        private void priceBoxPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
+        {
+            Original(priceBox, priceBoxPlaceHolder);
+            priceBox.Focus();
         }
 
-        private void logoBoxPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
+        private void actSkidBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            Original(logoBox, logoBoxPlaceHolder);
-            logoBox.Focus();
+            check(actSkidBox, actSkidBoxPlaceHolder);
+            placeHolder(actSkidBox, actSkidBoxPlaceHolder);
+        }
+        private void actSkidBoxPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
+        {
+            Original(actSkidBox, actSkidBoxPlaceHolder);
+            actSkidBox.Focus();
         }
 
-        private void addressBox_LostFocus(object sender, RoutedEventArgs e)
+        private void maxSkidBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            check(addressBox, addressBoxPlaceHolder);
-            placeHolder(addressBox, addressBoxPlaceHolder);
+            check(maxSkidBox, maxSkidBoxPlaceHolder);
+            placeHolder(maxSkidBox, maxSkidBoxPlaceHolder);
+        }
+        private void maxSkidBoxPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
+        {
+            Original(maxSkidBox, maxSkidBoxPlaceHolder);
+            maxSkidBox.Focus();
         }
 
-        private void addressBoxPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
+        private void kolvoBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            Original(addressBox, addressBoxPlaceHolder);
-            addressBox.Focus();
+            check(kolvoBox, kolvoBoxPlaceHolder);
+            placeHolder(kolvoBox, kolvoBoxPlaceHolder);
+        }
+        private void kolvoBoxPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
+        {
+            Original(kolvoBox, kolvoBoxPlaceHolder);
+            kolvoBox.Focus();
         }
 
-        private void innBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            check(innBox, innBoxPlaceHolder);
-            placeHolder(innBox, innBoxPlaceHolder);
-        }
 
-        private void innBoxPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
-        {
-            Original(innBox, innBoxPlaceHolder);
-            innBox.Focus();
-        }
-
-        private void kppBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            check(kppBox, kppBoxPlaceHolder);
-            placeHolder(kppBox, kppBoxPlaceHolder);
-        }
-
-        private void kppBoxPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
-        {
-            Original(kppBox, kppBoxPlaceHolder);
-            kppBox.Focus();
-        }
-
-        private void directorNameBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            check(directorNameBox, directorNameBoxPlaceHolder);
-            placeHolder(directorNameBox, directorNameBoxPlaceHolder);
-        }
-
-        private void directorNameBoxPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
-        {
-            Original(directorNameBox, directorNameBoxPlaceHolder);
-            directorNameBox.Focus();
-        }
-
-        private void phoneBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            check(phoneBox, phoneBoxPlaceHolder);
-            placeHolder(phoneBox, phoneBoxPlaceHolder);
-        }
-
-        private void phoneBoxPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
-        {
-            Original(phoneBox, phoneBoxPlaceHolder);
-            phoneBox.Focus();
-        }
-
-        private void emailBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            check(emailBox, emailBoxPlaceHolder);
-            placeHolder(emailBox, emailBoxPlaceHolder);
-        }
-
-        private void emailBoxPlaceHolder_GotFocus(object sender, RoutedEventArgs e)
-        {
-            Original(emailBox, emailBoxPlaceHolder);
-            emailBox.Focus();
-        }
         private void Original(TextBox org, TextBox place)
         {
             place.Visibility = Visibility.Collapsed;

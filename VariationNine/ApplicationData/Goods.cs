@@ -45,7 +45,7 @@ namespace VariationNine.ApplicationData
                 }
                 else
                 {
-                    return "/images/" + image;
+                    return "/goodsimages/" + image;
                 }
             }
         }

@@ -41,15 +41,15 @@ namespace VariationNine
                     {
                         case 1:
                             MessageBox.Show("Здравствуйте, пользователь " + userObj.user_name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                            AppFrame.frameMain.Navigate(new Goods());
+                            AppFrame.frameMain.Navigate(new Show(userObj));
                             break;
                         case 2:
                             MessageBox.Show("Здравствуйте, менеджер " + userObj.user_name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                            AppFrame.frameMain.Navigate(new Goods());
+                            AppFrame.frameMain.Navigate(new Show(userObj));
                             break;
                         case 3:
                             MessageBox.Show("Здравствуйте, " + userObj.user_name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                            AppFrame.frameMain.Navigate(new Goods());
+                            AppFrame.frameMain.Navigate(new Show(userObj));
                             break;
                         default:
                             MessageBox.Show("Ошибка данных на сервере.", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -66,7 +66,7 @@ namespace VariationNine
 
         private void SendList_Click(object sender, RoutedEventArgs e)
         {
-            AppFrame.frameMain.Navigate(new Goods());
+            AppFrame.frameMain.Navigate(new Show(null));
         }
 
         private void ExitB_Click(object sender, RoutedEventArgs e)

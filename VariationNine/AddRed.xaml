@@ -23,65 +23,68 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0">
-                    <Label Content="Наименование:" Height="30" Margin="5" VerticalContentAlignment="Center" FontWeight="Bold"/>
+                    <Label Content="Артикль:" Height="30" Margin="5" VerticalContentAlignment="Center" FontWeight="Bold"/>
                     <Grid>
-                        <TextBox Text="{Binding Title}" x:Name="nameBox" Height="30" Margin="5" VerticalContentAlignment="Center" LostFocus="nameBox_LostFocus"/>
-                        <TextBox Text="Наименование" x:Name="nameBoxPlaceHolder" Height="30" Margin="5" VerticalContentAlignment="Center" Foreground="#808080" GotFocus="nameBoxPlaceHolder_GotFocus"/>
+                        <TextBox Text="{Binding good_article}" x:Name="articleBox" Height="30" Margin="5" VerticalContentAlignment="Center" LostFocus="articleBox_LostFocus"/>
+                        <TextBox Text="Артикль" x:Name="articleBoxPlaceHolder" Height="30" Margin="5" VerticalContentAlignment="Center" Foreground="#808080" GotFocus="articleBoxPlaceHolder_GotFocus"/>
                     </Grid>
 
-                    <Label Content="Тип агента:" Height="30" Margin="5" VerticalContentAlignment="Center" FontWeight="Bold"/>
-                    <ComboBox SelectedIndex="{Binding AgentTypeID}" DisplayMemberPath="Title" x:Name="Combo_names" Height="30" Margin="5" VerticalContentAlignment="Center"/>
-
-                    <Label Content="Приоритет:" Height="30" Margin="5" VerticalContentAlignment="Center" FontWeight="Bold"/>
+                    <Label Content="Наименование:" Height="30" Margin="5" VerticalContentAlignment="Center" FontWeight="Bold"/>
                     <Grid>
-                        <TextBox Text="{Binding Priority}" x:Name="priorityBox" Height="30" Margin="5" VerticalContentAlignment="Center" LostFocus="priorityBox_LostFocus"/>
-                        <TextBox Text="Приоритет" x:Name="priorityBoxPlaceHolder" Height="30" Margin="5" VerticalContentAlignment="Center" Foreground="#808080" GotFocus="priorityBoxPlaceHolder_GotFocus"/>
+                        <TextBox Text="{Binding good_name}" x:Name="nameBox" Height="30" Margin="5" VerticalContentAlignment="Center" LostFocus="nameBox_LostFocus"/>
+                        <TextBox Text="Наименование" x:Name="nameBoxPlaceHolder" Height="30" Margin="5" VerticalContentAlignment="Center" GotFocus="nameBoxPlaceHolder_GotFocus"/>
+                    </Grid>
+
+                    <Label Content="Изображение:" Height="30" Margin="5" VerticalContentAlignment="Center" FontWeight="Bold"/>
+                    <Grid>
+                        <TextBox Text="{Binding image}" x:Name="imageBox" Height="30" Margin="5" VerticalContentAlignment="Center" LostFocus="imageBox_LostFocus"/>
+                        <TextBox Text="Изображение" x:Name="imageBoxPlaceHolder" Height="30" Margin="5" VerticalContentAlignment="Center" Foreground="#808080" GotFocus="imageBoxPlaceHolder_GotFocus"/>
+                    </Grid>
+
+                    <Label Content="Описание:" Height="30" Margin="5" VerticalContentAlignment="Center" FontWeight="Bold"/>
+                    <Grid>
+                        <TextBox Text="{Binding description}" x:Name="descriptionBox" Height="30" Margin="5" VerticalContentAlignment="Center" LostFocus="descriptionBox_LostFocus"/>
+                        <TextBox Text="Описание" x:Name="descriptionBoxPlaceHolder" Height="30" Margin="5" VerticalContentAlignment="Center" Foreground="#808080" GotFocus="descriptionBoxPlaceHolder_GotFocus"/>
                     </Grid>
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
-                    <Label Content="Логотип компании:" Height="30" Margin="5" VerticalContentAlignment="Center" FontWeight="Bold"/>
-                    <Grid>
-                        <TextBox Text="{Binding Logo}" x:Name="logoBox" Height="30" Margin="5" VerticalContentAlignment="Center" LostFocus="logoBox_LostFocus"/>
-                        <TextBox Text="Лого" x:Name="logoBoxPlaceHolder" Height="30" Margin="5" VerticalContentAlignment="Center" Foreground="#808080" GotFocus="logoBoxPlaceHolder_GotFocus"/>
-                    </Grid>
+                    <Label Content="Категория:" Height="30" Margin="5" VerticalContentAlignment="Center" FontWeight="Bold"/>
+                    <ComboBox SelectedIndex="{Binding category_id}" DisplayMemberPath="category_name" x:Name="categoryComboBox" Height="30" Margin="5" VerticalContentAlignment="Center"/>
 
-                    <Label Content="Адрес:" Height="30" Margin="5" VerticalContentAlignment="Center" FontWeight="Bold"/>
-                    <Grid>
-                        <TextBox Text="{Binding Address}" x:Name="addressBox" Height="30" Margin="5" VerticalContentAlignment="Center" LostFocus="addressBox_LostFocus"/>
-                        <TextBox Text="Адрес" x:Name="addressBoxPlaceHolder" Height="30" Margin="5" VerticalContentAlignment="Center" Foreground="#808080" GotFocus="addressBoxPlaceHolder_GotFocus"/>
-                    </Grid>
+                    <Label Content="Еденица измерения:" Height="30" Margin="5" VerticalContentAlignment="Center" FontWeight="Bold"/>
+                    <ComboBox SelectedIndex="{Binding edi_id}" DisplayMemberPath="edi_name" x:Name="ediComboBox" Height="30" Margin="5" VerticalContentAlignment="Center"/>
 
-                    <Label Content="ИНН:" Height="30" Margin="5" VerticalContentAlignment="Center" FontWeight="Bold"/>
-                    <Grid>
-                        <TextBox Text="{Binding INN}" x:Name="innBox" Height="30" Margin="5" VerticalContentAlignment="Center" LostFocus="innBox_LostFocus"/>
-                        <TextBox Text="ИНН" x:Name="innBoxPlaceHolder" Height="30" Margin="5" VerticalContentAlignment="Center" Foreground="#808080" GotFocus="innBoxPlaceHolder_GotFocus"/>
-                    </Grid>
+                    <Label Content="Производитель:" Height="30" Margin="5" VerticalContentAlignment="Center" FontWeight="Bold"/>
+                    <ComboBox SelectedIndex="{Binding maker_id}" DisplayMemberPath="maker_name" x:Name="makerComboBox" Height="30" Margin="5" VerticalContentAlignment="Center"/>
+
+                    <Label Content="Поставщик:" Height="30" Margin="5" VerticalAlignment="Center" FontWeight="Bold"/>
+                    <ComboBox SelectedIndex="{Binding giver_id}" DisplayMemberPath="giver_name" x:Name="giverComboBox" Height="30" Margin="5" VerticalContentAlignment="Center"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="2">
-                    <Label Content="КПП:" Height="30" Margin="5" VerticalContentAlignment="Center" FontWeight="Bold"/>
+                    <Label Content="Цена:" Height="30" Margin="5" VerticalContentAlignment="Center" FontWeight="Bold"/>
                     <Grid>
-                        <TextBox Text="{Binding KPP}" x:Name="kppBox" Height="30" Margin="5" VerticalContentAlignment="Center" LostFocus="kppBox_LostFocus"/>
-                        <TextBox Text="КПП" x:Name="kppBoxPlaceHolder" Height="30" Margin="5" VerticalContentAlignment="Center" Foreground="#808080" GotFocus="kppBoxPlaceHolder_GotFocus"/>
+                        <TextBox Text="{Binding price}" x:Name="priceBox" Height="30" Margin="5" VerticalContentAlignment="Center" LostFocus="priceBox_LostFocus"/>
+                        <TextBox Text="Цена" x:Name="priceBoxPlaceHolder" Height="30" Margin="5" VerticalContentAlignment="Center" Foreground="#808080" GotFocus="priceBoxPlaceHolder_GotFocus"/>
                     </Grid>
 
-                    <Label Content="Имя директора:" Height="30" Margin="5" VerticalContentAlignment="Center" FontWeight="Bold"/>
+                    <Label Content="Актуальная скидка:" Height="30" Margin="5" VerticalContentAlignment="Center" FontWeight="Bold"/>
                     <Grid>
-                        <TextBox Text="{Binding DirectorName}" x:Name="directorNameBox" Height="30" Margin="5" VerticalContentAlignment="Center" LostFocus="directorNameBox_LostFocus"/>
-                        <TextBox Text="Имя директора" x:Name="directorNameBoxPlaceHolder" Height="30" Margin="5" VerticalContentAlignment="Center" Foreground="#808080" GotFocus="directorNameBoxPlaceHolder_GotFocus"/>
+                        <TextBox Text="{Binding act_skid}" x:Name="actSkidBox" Height="30" Margin="5" VerticalContentAlignment="Center" LostFocus="actSkidBox_LostFocus"/>
+                        <TextBox Text="Актуальная скидка" x:Name="actSkidBoxPlaceHolder" Height="30" Margin="5" VerticalContentAlignment="Center" Foreground="#808080" GotFocus="actSkidBoxPlaceHolder_GotFocus"/>
                     </Grid>
 
-                    <Label Content="Телефон:" Height="30" Margin="5" VerticalContentAlignment="Center" FontWeight="Bold"/>
+                    <Label Content="Максимальная скидка:" Height="30" Margin="5" VerticalContentAlignment="Center" FontWeight="Bold"/>
                     <Grid>
-                        <TextBox Text="{Binding Phone}" x:Name="phoneBox" Height="30" Margin="5" VerticalContentAlignment="Center" LostFocus="phoneBox_LostFocus"/>
-                        <TextBox Text="Телефон" x:Name="phoneBoxPlaceHolder" Height="30" Margin="5" VerticalContentAlignment="Center" Foreground="#808080" GotFocus="phoneBoxPlaceHolder_GotFocus"/>
+                        <TextBox Text="{Binding max_skid}" x:Name="maxSkidBox" Height="30" Margin="5" VerticalContentAlignment="Center" LostFocus="maxSkidBox_LostFocus"/>
+                        <TextBox Text="Максимальная скидка" x:Name="maxSkidBoxPlaceHolder" Height="30" Margin="5" VerticalContentAlignment="Center" Foreground="#808080" GotFocus="maxSkidBoxPlaceHolder_GotFocus"/>
                     </Grid>
 
-                    <Label Content="Email компании:" Height="30" Margin="5" VerticalContentAlignment="Center" FontWeight="Bold"/>
+                    <Label Content="Количество на складе:" Height="30" Margin="5" VerticalContentAlignment="Center" FontWeight="Bold"/>
                     <Grid>
-                        <TextBox Text="{Binding Email}" x:Name="emailBox" Height="30" Margin="5" VerticalContentAlignment="Center" LostFocus="emailBox_LostFocus"/>
-                        <TextBox Text="Email" x:Name="emailBoxPlaceHolder" Height="30" Margin="5" VerticalContentAlignment="Center" Foreground="#808080" GotFocus="emailBoxPlaceHolder_GotFocus"/>
+                        <TextBox Text="{Binding kolvo}" x:Name="kolvoBox" Height="30" Margin="5" VerticalContentAlignment="Center" LostFocus="kolvoBox_LostFocus"/>
+                        <TextBox Text="Количество на складе" x:Name="kolvoBoxPlaceHolder" Height="30" Margin="5" VerticalContentAlignment="Center" Foreground="#808080" GotFocus="kolvoBoxPlaceHolder_GotFocus"/>
                     </Grid>
                 </StackPanel>
             </Grid>
@@ -89,10 +92,9 @@
 
         <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1" Background="#E0FFFF" CornerRadius="15" Margin="5" MinWidth="800" MaxWidth="900" MinHeight="50" MaxHeight="70">
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="Add" Content="Добавить агента" Width="200" Height="30"  Margin="5" Click="Add_Click"/>
-                <Button x:Name="Red" Content="Редактировать агента" Width="200" Height="30" Margin="5" Click="Red_Click"/>
-                <Button x:Name="list" Content="Список агентов" Width="200" Height="30" Margin="5" Click="list_Click"/>
-                <Button x:Name="goBack" Content="Назад" Width="200" Height="30" Margin="5" Click="goBack_Click"/>
+                <Button x:Name="Add" Content="Добавить товар" Width="200" Height="30"  Margin="5" Click="Add_Click"/>
+                <Button x:Name="Red" Content="Редактировать товар" Width="200" Height="30" Margin="5" Click="Red_Click"/>
+                <Button x:Name="list" Content="Список товаров" Width="200" Height="30" Margin="5" Click="list_Click"/>
             </StackPanel>
         </Border>
     </Grid>

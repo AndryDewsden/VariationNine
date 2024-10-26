@@ -72,7 +72,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Goods.xaml">
+    <Page Include="Cart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Show.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -140,8 +144,11 @@
     <Compile Include="Auto.xaml.cs">
       <DependentUpon>Auto.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Goods.xaml.cs">
-      <DependentUpon>Goods.xaml</DependentUpon>
+    <Compile Include="Cart.xaml.cs">
+      <DependentUpon>Cart.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Show.xaml.cs">
+      <DependentUpon>Show.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
